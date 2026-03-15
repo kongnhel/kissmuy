@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <title>Our Journey | Anniversary</title>
 
     <link
@@ -23,7 +26,6 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        cursor: none;
       }
 
       body {
@@ -35,6 +37,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        cursor: none;
       }
 
       /* --- Background Video --- */
@@ -54,29 +57,27 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.4);
+        background: rgba(0, 0, 0, 0.5);
         z-index: -1;
       }
 
-      /* --- Custom Cursor --- */
-      #cursor-dot {
-        width: 6px;
-        height: 6px;
-        background: white;
+      /* --- Custom Cursor (Hidden on Mobile) --- */
+      #cursor-dot,
+      #cursor-outline {
         position: fixed;
         border-radius: 50%;
         pointer-events: none;
         z-index: 9999;
       }
-
+      #cursor-dot {
+        width: 6px;
+        height: 6px;
+        background: white;
+      }
       #cursor-outline {
         width: 35px;
         height: 35px;
         border: 1.5px solid var(--accent);
-        position: fixed;
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 9998;
         transition: transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       }
 
@@ -105,11 +106,13 @@
         z-index: 10;
         text-align: center;
         padding: 20px;
+        width: 100%;
+        max-width: 600px;
       }
 
       .hero h1 {
         font-family: "Dancing Script", cursive;
-        font-size: clamp(3.5rem, 12vw, 7rem);
+        font-size: clamp(2.8rem, 10vw, 6rem);
         background: linear-gradient(to right, #ff758f, #ffafbd, #ff758f);
         background-size: 200% auto;
         -webkit-background-clip: text;
@@ -117,7 +120,8 @@
         animation:
           shine 3s linear infinite,
           float 4s ease-in-out infinite;
-        filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.5));
+        filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.5));
+        margin-bottom: 10px;
       }
 
       @keyframes shine {
@@ -135,111 +139,135 @@
           transform: translateY(0);
         }
         50% {
-          transform: translateY(-15px);
+          transform: translateY(-10px);
         }
       }
 
       .together-text {
         text-transform: uppercase;
-        letter-spacing: 5px;
-        font-size: 0.8rem;
-        margin-bottom: 30px;
-        color: white;
-        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-        animation: pulse 2s infinite;
+        letter-spacing: 4px;
+        font-size: 0.7rem;
+        margin-bottom: 20px;
+        opacity: 0.8;
       }
 
-      @keyframes pulse {
-        0%,
-        100% {
-          opacity: 0.6;
-        }
-        50% {
-          opacity: 1;
-        }
-      }
-
-      /* --- Photo Sticker --- */
+      /* --- Responsive Photo Sticker --- */
       .photo-sticker {
-        position: absolute;
-        top: -40px;
-        right: -90px;
-        width: 150px;
-        padding: 10px;
-        background: rgba(255, 255, 255, 0.15);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        border-radius: 22px;
-        backdrop-filter: blur(12px);
-        box-shadow: 0 14px 35px rgba(0, 0, 0, 0.5);
-        transform: rotate(10deg);
-        animation: photo-float 4s ease-in-out infinite;
-      }
-
-      .photo-sticker::before {
-        content: "💖";
-        position: absolute;
-        top: -14px;
-        left: -10px;
-        font-size: 22px;
+        position: relative;
+        margin: 20px auto 40px;
+        width: 130px;
+        padding: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        transform: rotate(-3deg);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       }
 
       .photo-sticker img {
         width: 100%;
-        height: 180px;
+        height: 150px;
         object-fit: cover;
-        border-radius: 16px;
-        display: block;
+        border-radius: 14px;
       }
 
       .photo-caption {
-        margin-top: 8px;
-        font-size: 0.8rem;
-        color: #fff;
+        margin-top: 5px;
+        font-size: 0.75rem;
         font-weight: 600;
       }
 
-      @keyframes photo-float {
-        0%,
-        100% {
-          transform: translateY(0) rotate(10deg);
-        }
-        50% {
-          transform: translateY(-14px) rotate(6deg);
-        }
-      }
-
-      /* --- Glass Counter --- */
+      /* --- Counter Grid --- */
       .counter-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 15px;
-        perspective: 1000px;
-        margin-top: 30px;
+        gap: 10px;
+        margin-top: 20px;
       }
 
       .counter-card {
         background: var(--glass);
-        backdrop-filter: blur(15px);
+        backdrop-filter: blur(10px);
         border: 1px solid var(--border);
-        padding: 25px 10px;
-        border-radius: 24px;
-        width: 110px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-        transition: all 0.4s ease;
+        padding: 15px 5px;
+        border-radius: 18px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
       }
 
       .counter-card span {
-        font-size: 2.2rem;
+        font-size: 1.5rem;
         font-weight: 700;
-        color: white;
         display: block;
       }
 
       .counter-card p {
-        font-size: 0.65rem;
+        font-size: 0.55rem;
         color: var(--accent);
         font-weight: 700;
-        margin-top: 8px;
+        margin-top: 4px;
+      }
+
+      /* --- Interaction Burst --- */
+      .burst {
+        position: absolute;
+        pointer-events: none;
+        animation: burst-move 0.8s ease-out forwards;
+        z-index: 9999;
+      }
+
+      @keyframes burst-move {
+        0% {
+          transform: translate(-50%, -50%) scale(0.5);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(var(--tx), var(--ty)) scale(1.2);
+          opacity: 0;
+        }
+      }
+
+      /* --- Music Controller --- */
+      #music-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: var(--glass);
+        border: 1px solid var(--border);
+        color: white;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* --- MOBILE ADJUSTMENTS --- */
+      @media (max-width: 600px) {
+        body {
+          cursor: auto;
+        }
+        #cursor-dot,
+        #cursor-outline {
+          display: none;
+        }
+        .counter-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 15px;
+        }
+        .counter-card {
+          padding: 20px 10px;
+        }
+        .counter-card span {
+          font-size: 1.8rem;
+        }
+        .photo-sticker {
+          transform: rotate(3deg);
+          margin-bottom: 30px;
+        }
       }
 
       /* --- Flying Stickers --- */
@@ -249,78 +277,22 @@
         z-index: 20;
         animation: float-upwards 8s linear forwards;
       }
-
       .sticker-img {
-        width: 90px;
+        width: 70px;
         height: auto;
-        filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.4));
+        filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
       }
-
       @keyframes float-upwards {
         0% {
-          transform: translateY(110vh) translateX(0) rotate(0deg) scale(0.8);
+          transform: translateY(110vh) scale(0.8);
           opacity: 0;
         }
         10% {
           opacity: 1;
         }
         100% {
-          transform: translateY(-20vh) translateX(100px) rotate(360deg)
-            scale(1.05);
+          transform: translateY(-20vh) translateX(50px) rotate(360deg) scale(1);
           opacity: 0;
-        }
-      }
-
-      /* --- Interaction Burst --- */
-      .burst {
-        position: absolute;
-        pointer-events: none;
-        animation: burst-move 0.8s ease-out forwards;
-        z-index: 9999;
-        font-weight: bold;
-      }
-
-      @keyframes burst-move {
-        0% {
-          transform: translate(-50%, -50%) scale(0.5);
-          opacity: 1;
-        }
-        100% {
-          transform: translate(var(--tx), var(--ty)) scale(1.5);
-          opacity: 0;
-        }
-      }
-
-      /* --- Music Controller --- */
-      #music-btn {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        background: var(--glass);
-        border: 1px solid var(--border);
-        color: white;
-        padding: 12px;
-        border-radius: 50%;
-        backdrop-filter: blur(10px);
-        cursor: pointer;
-        z-index: 1000;
-        font-size: 18px;
-      }
-
-      @media (max-width: 600px) {
-        .counter-grid {
-          grid-template-columns: repeat(2, 1fr);
-          justify-items: center;
-        }
-        .counter-card {
-          width: 140px;
-        }
-        #cursor-dot,
-        #cursor-outline {
-          display: none;
-        }
-        * {
-          cursor: auto;
         }
       }
     </style>
@@ -334,7 +306,15 @@
     <div id="cursor-dot"></div>
     <div id="cursor-outline"></div>
 
-    <button id="music-btn" onclick="toggleMusic()">🎵</button>
+    <button
+      id="music-btn"
+      onclick="
+        event.stopPropagation();
+        toggleMusic();
+      "
+    >
+      🎵
+    </button>
 
     <audio id="bg-audio" loop>
       <source src="11.mp4" type="audio/mpeg" />
@@ -374,17 +354,20 @@
       const audio = document.getElementById("bg-audio");
       let musicStarted = false;
 
-      // 1. Music Logic: Play on ANY click on the document
-      document.addEventListener("click", () => {
+      // Start music on first click/touch anywhere
+      const handleInteraction = (e) => {
         if (!musicStarted) {
           audio.play();
           document.getElementById("music-btn").innerText = "⏸️";
           musicStarted = true;
         }
-      });
+        createBurst(e.touches ? e.touches[0] : e);
+      };
+
+      document.addEventListener("click", handleInteraction);
+      document.addEventListener("touchstart", handleInteraction);
 
       function toggleMusic() {
-        // This still allows the button to pause/play after it has started
         if (audio.paused) {
           audio.play();
           document.getElementById("music-btn").innerText = "⏸️";
@@ -419,6 +402,7 @@
       setInterval(updateTimer, 1000);
       updateTimer();
 
+      // Cursor movement
       const dot = document.getElementById("cursor-dot");
       const outline = document.getElementById("cursor-outline");
       document.addEventListener("mousemove", (e) => {
@@ -428,22 +412,20 @@
         outline.style.top = e.clientY - 17 + "px";
       });
 
-      // 2. Burst Logic (Hearts + Love text)
-      document.addEventListener("click", (e) => {
+      function createBurst(pos) {
         const symbols = ["❤️", "💖", "✨", "Love"];
-        for (let i = 0; i < 12; i++) {
+        for (let i = 0; i < 8; i++) {
           const burst = document.createElement("div");
           burst.className = "burst";
           burst.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
-          burst.style.left = e.clientX + "px";
-          burst.style.top = e.clientY + "px";
-          burst.style.color = i % 2 === 0 ? "#ff758f" : "#ffafbd";
-          burst.style.setProperty("--tx", (Math.random() - 0.5) * 300 + "px");
-          burst.style.setProperty("--ty", (Math.random() - 0.5) * 300 + "px");
+          burst.style.left = pos.clientX + "px";
+          burst.style.top = pos.clientY + "px";
+          burst.style.setProperty("--tx", (Math.random() - 0.5) * 200 + "px");
+          burst.style.setProperty("--ty", (Math.random() - 0.5) * 200 + "px");
           document.body.appendChild(burst);
           setTimeout(() => burst.remove(), 800);
         }
-      });
+      }
 
       const stickerImages = [
         "https://s3.getstickerpack.com/storage/uploads/sticker-pack/dudu2/sticker_11.gif?1c0b8afeae78b0ee6ee1cbd70d49705e",
@@ -459,10 +441,9 @@
           stickerImages[Math.floor(Math.random() * stickerImages.length)];
         img.className = "sticker-img";
         sticker.appendChild(img);
-        sticker.style.left = Math.random() * 100 + "vw";
-        sticker.style.animationDuration = Math.random() * 5 + 7 + "s";
+        sticker.style.left = Math.random() * 90 + "vw";
         document.body.appendChild(sticker);
-        setTimeout(() => sticker.remove(), 12000);
+        setTimeout(() => sticker.remove(), 8000);
       }
 
       function createBGHeart() {
@@ -470,14 +451,13 @@
         h.className = "bg-heart";
         h.innerHTML = "❤️";
         h.style.left = Math.random() * 100 + "vw";
-        h.style.fontSize = Math.random() * 10 + 10 + "px";
-        h.style.animationDuration = Math.random() * 5 + 10 + "s";
+        h.style.animationDuration = Math.random() * 5 + 8 + "s";
         document.body.appendChild(h);
-        setTimeout(() => h.remove(), 15000);
+        setTimeout(() => h.remove(), 10000);
       }
 
-      setInterval(createSticker, 2000);
-      setInterval(createBGHeart, 500);
+      setInterval(createSticker, 3000);
+      setInterval(createBGHeart, 600);
     </script>
   </body>
 </html>
